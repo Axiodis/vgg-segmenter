@@ -1,81 +1,131 @@
-import sys
-import cv2
+# -*- coding: utf-8 -*-
 
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.uic import loadUi
-import qdarkstyle
-from predictor import Predictor
+# Form implementation generated from reading ui file 'main_window.ui'
+#
+# Created by: PyQt5 UI code generator 5.10.1
+#
+# WARNING! All changes made in this file will be lost!
 
-class App(QMainWindow):
-    SEGMENT_CLASSES = ['Aeroplane', 'Bicycle', 'Bird', 'Boat', 'Bottle', 'Bus', 'Car', 'Cat', 'Chair', 'Cow',
-                       'Dining Table', 'Dog', 'Horse', 'Motorbike', 'Person', 'Potted Plant', 'Sheep', 'Sofa', 'Train',
-                       'TV']
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-    def __init__(self):
-        super(App, self).__init__()
-        loadUi('main_window.ui', self)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 700)
+        MainWindow.setMinimumSize(QtCore.QSize(800, 700))
+        MainWindow.setStyleSheet("")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setMinimumSize(QtCore.QSize(800, 600))
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName("gridLayout")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem, 1, 0, 1, 1)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.gridLayout.addItem(spacerItem1, 2, 1, 1, 1)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_3.addWidget(self.label_2)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.startButton = QtWidgets.QPushButton(self.centralwidget)
+        self.startButton.setObjectName("startButton")
+        self.horizontalLayout_2.addWidget(self.startButton)
+        self.stopButton = QtWidgets.QPushButton(self.centralwidget)
+        self.stopButton.setMinimumSize(QtCore.QSize(0, 28))
+        self.stopButton.setObjectName("stopButton")
+        self.horizontalLayout_2.addWidget(self.stopButton)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_2)
+        self.horizontalLayout.addLayout(self.verticalLayout_3)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem2)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_select_class = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_select_class.setFont(font)
+        self.label_select_class.setObjectName("label_select_class")
+        self.verticalLayout_2.addWidget(self.label_select_class)
+        self.comboBoxSegmentClass = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBoxSegmentClass.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.comboBoxSegmentClass.sizePolicy().hasHeightForWidth())
+        self.comboBoxSegmentClass.setSizePolicy(sizePolicy)
+        self.comboBoxSegmentClass.setMinimumSize(QtCore.QSize(228, 28))
+        self.comboBoxSegmentClass.setMaximumSize(QtCore.QSize(500, 28))
+        self.comboBoxSegmentClass.setObjectName("comboBoxSegmentClass")
+        self.verticalLayout_2.addWidget(self.comboBoxSegmentClass)
+        self.horizontalLayout.addLayout(self.verticalLayout_2)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        self.verticalLayout.addItem(spacerItem3)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy)
+        self.label.setMinimumSize(QtCore.QSize(640, 480))
+        self.label.setMaximumSize(QtCore.QSize(1280, 960))
+        self.label.setSizeIncrement(QtCore.QSize(40, 60))
+        self.label.setStyleSheet("background: black;border: 2px solid #39B6E8; border-radius: 15px;")
+        self.label.setFrameShape(QtWidgets.QFrame.Box)
+        self.label.setText("")
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
+        self.gridLayout.addLayout(self.verticalLayout, 1, 1, 1, 1)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem4, 1, 2, 1, 1)
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.gridLayout.addItem(spacerItem5, 0, 1, 1, 1)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.menuProcess = QtWidgets.QMenu(self.menubar)
+        self.menuProcess.setObjectName("menuProcess")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.actionProcess_Image = QtWidgets.QAction(MainWindow)
+        self.actionProcess_Image.setObjectName("actionProcess_Image")
+        self.actionProcess_Video = QtWidgets.QAction(MainWindow)
+        self.actionProcess_Video.setObjectName("actionProcess_Video")
+        self.menuProcess.addAction(self.actionProcess_Image)
+        self.menuProcess.addAction(self.actionProcess_Video)
+        self.menubar.addAction(self.menuProcess.menuAction())
 
-        self.comboBoxSegmentClass.addItems(self.SEGMENT_CLASSES)
-        self.comboBoxSegmentClass.setCurrentIndex(14)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.class_to_segment = 15
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label_2.setText(_translate("MainWindow", "Options"))
+        self.startButton.setText(_translate("MainWindow", "Start"))
+        self.stopButton.setText(_translate("MainWindow", "Stop"))
+        self.label_select_class.setText(_translate("MainWindow", "Select Class"))
+        self.menuProcess.setTitle(_translate("MainWindow", "Process"))
+        self.actionProcess_Image.setText(_translate("MainWindow", "Process Image"))
+        self.actionProcess_Video.setText(_translate("MainWindow", "Process Video"))
 
-        self.image = None
-        self.predictor = Predictor()
-
-        self._connect_signals()
-
-        self.setWindowTitle('VggFcn')
-        self.show()
-
-    def _connect_signals(self):
-        self.startButton.clicked.connect(self.start_webcam)
-        self.stopButton.clicked.connect(self.stop_webcam)
-
-        self.comboBoxSegmentClass.currentIndexChanged[str].connect(self.change_class_to_segment)
-
-    def start_webcam(self):
-        self.capture = cv2.VideoCapture(0)
-        self.capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-        self.capture.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
-
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update_frame)
-        self.timer.start(30)
-
-    def update_frame(self):
-        ret, self.image = self.capture.read()
-
-        self.image = cv2.flip(self.image, 1)
-        predict_image = self.predictor.predict_image(self.image)
-
-        for i in range(predict_image.shape[0]):
-            for j in range(predict_image.shape[1]):
-                if predict_image[i, j] != self.class_to_segment:
-                    self.image[i, j] = [0, 0, 0]
-
-        self.display_image(self.image)
-
-    def display_image(self, image):
-        qformat = QImage.Format_RGB888
-
-        out_image = QImage(image, image.shape[1], image.shape[0], image.strides[0], qformat)
-        out_image = out_image.rgbSwapped()
-
-        self.label.setPixmap(QPixmap.fromImage(out_image))
-        self.label.setScaledContents(True)
-
-    def stop_webcam(self):
-        self.timer.stop()
-
-    def change_class_to_segment(self, segment_class_name):
-        self.class_to_segment = self.comboBoxSegmentClass.currentIndex() + 1
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
-    window = App()
-    sys.exit(app.exec_())
