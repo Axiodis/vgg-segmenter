@@ -4,12 +4,7 @@ import pydensecrf.densecrf as dcrf
 from pydensecrf.utils import compute_unary, create_pairwise_bilateral, \
     create_pairwise_gaussian, unary_from_softmax
 
-from tensorflow.python.framework import dtypes
-from tensorflow.python.framework.ops import convert_to_tensor
-from processlabel import VocLabelsProcessor
-
 tf.reset_default_graph()
-IMAGENET_MEAN = tf.constant([123.68, 116.779, 103.939], dtype=tf.float32)
 NP_IMAGENET_MEAN = np.array([123.68, 116.779, 103.939], dtype=np.float32)
 
 
@@ -85,32 +80,6 @@ class Predictor:
 
     def __setstate__(self, state):
         self.__dict__.update(state)
-
-    # def predict_image_from_path(self, image_path):
-    #     image = self.sess.run(self.image_from_path, feed_dict={self.x_path: image_path})
-    #
-    #     label_pred = self.sess.run(self.y, feed_dict={self.x: image, self.keep_prob: 1.0})
-    #
-    #     result_label = self.label_processor.class_label_to_color(label_pred[0])
-    #
-    #     return result_label
-    #
-    # def prepare_image_from_path(self):
-    #     image_path = convert_to_tensor(self.x_path, dtype=dtypes.string)
-    #
-    #     img_string = tf.read_file(image_path)
-    #
-    #     img_decoded = tf.image.decode_jpeg(img_string, channels=3)
-    #
-    #     img_decoded = tf.to_float(img_decoded)
-    #
-    #     img_centered = tf.subtract(img_decoded, IMAGENET_MEAN)
-    #
-    #     img_bgr = img_centered[:, :, ::-1]
-    #
-    #     image = tf.expand_dims(img_bgr, 0)
-    #
-    #     return image
 
     def __del__(self):
         self.sess.close()
